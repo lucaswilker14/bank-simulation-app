@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 
+
 const transactionSchema = new Schema({
 
     accountId: {
@@ -17,7 +18,13 @@ const transactionSchema = new Schema({
     dateOfTransaction: {
         type: Date,
         default: Date.now()
-    }
+    },
+
+    typeTransaction: {
+        type: String
+    },
+
+    amount: { type: Number }
 
 }, { timestamp: true });
 
