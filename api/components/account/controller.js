@@ -1,6 +1,5 @@
 import { model } from 'mongoose'
 import TransactionController from '../transaction/controller'
-const moment = require('moment');
 
 const accountModel = model('Account')
 const transactionModel = model('Transaction');
@@ -94,8 +93,8 @@ class AccountController {
                 'Type Transaction: ': trans.typeTransaction,
                 'Value: ': trans.value,
                 'Account ID: ': trans.accountId._id,
-                'Date: ': trans.dateOfTransaction.toUTCString('short'),
-                'Balance/Amount: ': trans.amount
+                'Date: ': trans.dateOfTransaction.toLocaleString(),
+                'Balance / Amount: ': trans.amount
             };
         });
     }
