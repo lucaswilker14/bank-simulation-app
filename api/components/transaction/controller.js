@@ -16,6 +16,11 @@ class TransactionController {
 
             account.balance = account.balance + parseFloat(value);
             await account.save();
+
+            const new_transaction = new transactionModel({accountId, value, typeTransaction: 'DEPOSIT'});
+            new_transaction.amount = account.balance;
+            await new_transaction.save();
+
             return res.send({ message: 'Deposit successful'}).status('200');
         } catch (e) {
             next(e)
@@ -41,6 +46,11 @@ class TransactionController {
             account.balance = account.balance - parseFloat(value);
             account.limitWithdrawDaily = account.limitWithdrawDaily - parseFloat(value);
             await account.save();
+
+            const new_transaction = new transactionModel({accountId, value, typeTransaction: 'WITHDRAW'});
+            new_transaction.amount = account.balance;
+            await new_transaction.save();
+
             return res.send({ message: 'Withdraw successful'}).status('200');
         } catch (e) {
             next(e)

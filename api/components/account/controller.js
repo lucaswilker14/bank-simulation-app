@@ -1,8 +1,10 @@
 import { model } from 'mongoose'
 import TransactionController from '../transaction/controller'
+const moment = require('moment');
 
 const accountModel = model('Account')
-const personModel = model('Person')
+const transactionModel = model('Transaction');
+
 const transactionController = new TransactionController();
 
 class AccountController {
@@ -57,7 +59,47 @@ class AccountController {
         } catch (e) {
             next(e)
         }
+    };
+
+    async blockAccount(req, res, next) {
+        try {
+            const accountId = req.params.id;
+            const account = await accountModel.findOne({_id: accountId});
+            if (!account) return res.send({ message: 'It is not possible to make the deposit. ' +
+                    'Check that the account is valid'}).status('404');
+            if (account.active === false) return res.send({ message: 'Account already block'}).status('401');
+            account.active = false;
+            await account.save();
+            return res.send({ messsage: 'Account block', account: account._id});
+        } catch (e) {
+            next(e)
+        }
+    };
+
+    async getExtract(req, res, next) {
+        try {
+            const accountId = req.params.id;
+            const trans = await transactionModel.find( { accountId: accountId })
+                .populate({path: 'accountId'});
+            if (!trans) return res.send({ message: 'You have no transactions for this account!' })
+            return res.send({transactions: AccountController.formatterExtract(trans)});
+        } catch (e) {
+            next(e)
+        }
+    };
+
+    static formatterExtract(transaction) {
+        return transaction.map((trans) => {
+            return {
+                'Type Transaction: ': trans.typeTransaction,
+                'Value: ': trans.value,
+                'Account ID: ': trans.accountId._id,
+                'Date: ': trans.dateOfTransaction.toUTCString('short'),
+                'Balance/Amount: ': trans.amount
+            };
+        });
     }
+
 }
 
 module.exports = AccountController;
