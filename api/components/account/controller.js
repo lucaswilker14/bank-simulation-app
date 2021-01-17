@@ -18,10 +18,10 @@ class AccountController {
 
     async createAccount(req, res, next) {
         try {
-            const { person, balance, limitWithdraw, accountType } = req.body;
-            const new_account = new accountModel({ person, balance, limitWithdraw, accountType });
+            const { personId, balance, limitWithdrawDaily, accountType } = req.body;
+            const new_account = new accountModel({ personId, balance, limitWithdrawDaily, accountType });
             await new_account.save();
-            return res.send({ message: 'Account successfully created', account: new_account});
+            return res.send({ message: 'Account successfully created', account: new_account}).status('201');
         } catch (e) {
             next(e)
         }
@@ -29,11 +29,35 @@ class AccountController {
 
     async makeDeposit(req, res, next) {
         try {
-            return await transactionController.makeDeposit(req, res, next);
+            const accountId = req.params.id;
+            const { value } = req.body;
+            return await transactionController.makeDeposit(accountId, value, res, next);
         } catch (e) {
             next(e)
         }
     };
+
+    async getBalance(req, res, next) {
+        try {
+            const accountId = req.params.id;
+            const account = await accountModel.findOne({_id: accountId});
+            if (!account) return res.send({ message: 'It is not possible to make the deposit. ' +
+                    'Check that the account is valid'}).status('404');
+            return res.send({ Balance: 'US$ ' + account.balance.toFixed(2) });
+        } catch (e) {
+            next(e)
+        }
+    };
+
+    async makeWithdraw(req, res, next) {
+        try {
+            const accountId = req.params.id;
+            const { value } = req.body;
+            return await transactionController.makeWithdraw(accountId, value, res, next);
+        } catch (e) {
+            next(e)
+        }
+    }
 }
 
 module.exports = AccountController;
