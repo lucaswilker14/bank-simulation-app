@@ -42,8 +42,10 @@ class AccountController {
         try {
             const accountId = req.params.id;
             const account = await accountModel.findOne({_id: accountId});
+
             if (!account) return res.send({ message: 'It is not possible to make the deposit. ' +
                     'Check that the account is valid'}).status('404');
+
             return res.send({ Balance: 'US$ ' + account.balance.toFixed(2) });
         } catch (e) {
             next(e)
@@ -64,9 +66,12 @@ class AccountController {
         try {
             const accountId = req.params.id;
             const account = await accountModel.findOne({_id: accountId});
+
             if (!account) return res.send({ message: 'It is not possible to make the deposit. ' +
                     'Check that the account is valid'}).status('404');
+
             if (account.active === false) return res.send({ message: 'Account already block'}).status('401');
+
             account.active = false;
             await account.save();
             return res.send({ messsage: 'Account block', account: account._id});

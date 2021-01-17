@@ -8,6 +8,9 @@ class TransactionController {
         try {
             const account = await accountModel.findOne( { _id: accountId });
 
+            if (!account.active) return res.send({ message: 'It is not possible to make the deposit. ' +
+                    'Account is not active'}).status('401');
+
             if(!account) return res.send({ message: 'It is not possible to make the deposit. ' +
                     'Check that the account is valid'}).status('404');
 
@@ -30,6 +33,9 @@ class TransactionController {
     async makeWithdraw(accountId, value, res, next) {
         try {
             const account = await accountModel.findOne( { _id: accountId });
+
+            if (!account.active) return res.send({ message: 'It is not possible to make the deposit. ' +
+                    'Account is not active'}).status('401');
 
             if(!account) return res.send({ message: 'It is not possible to make the withdraw. ' +
                     'Check that the account is valid'}).status('404');
