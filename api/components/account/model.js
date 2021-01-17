@@ -3,7 +3,7 @@ import uniqueValidator from 'mongoose-unique-validator';
 
 const accountSchema = new Schema({
 
-    person: {
+    personId: {
         type: Schema.Types.ObjectId,
         ref: 'Person',
         required: [true, 'is required']
@@ -14,7 +14,7 @@ const accountSchema = new Schema({
         required: true
     },
 
-    limitWithdraw: {
+    limitWithdrawDaily: {
         type: Number,
         required: true
     },
