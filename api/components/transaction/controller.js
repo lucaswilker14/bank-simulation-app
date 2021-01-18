@@ -8,14 +8,14 @@ class TransactionController {
         try {
             const account = await accountModel.findOne( { _id: accountId });
 
-            if (!account.active) return res.send({ message: 'It is not possible to make the deposit. ' +
-                    'Account is not active'}).status('403');
+            if(!account) return res.status('404').send({ message: 'It is not possible to make the deposit. ' +
+                    'Check that the account is valid'});
 
-            if(!account) return res.send({ message: 'It is not possible to make the deposit. ' +
-                    'Check that the account is valid'}).status('404');
+            if (!account.active) return res.status('403').send({ message: 'It is not possible to make the deposit. ' +
+                    'Account is not active'});
 
-            if (value <= 0) return res.send({ message: 'It is not possible to make the deposit. ' +
-                    'Invalid value to deposit'}).status('403');
+            if (value <= 0) return res.status('403').send({ message: 'It is not possible to make the deposit. ' +
+                    'Invalid value to deposit'});
 
             account.balance = account.balance + parseFloat(value);
             await account.save();
@@ -24,7 +24,7 @@ class TransactionController {
             new_transaction.amount = account.balance;
             await new_transaction.save();
 
-            return res.send({ message: 'Deposit successful'}).status('200');
+            return res.status('200').send({ message: 'Deposit successful'});
         } catch (e) {
             next(e)
         }
@@ -34,20 +34,21 @@ class TransactionController {
         try {
             const account = await accountModel.findOne( { _id: accountId });
 
-            if (!account.active) return res.send({ message: 'It is not possible to make the deposit. ' +
-                    'Account is not active'}).status('403');
+            if(!account) return res.status('404').send({ message: 'It is not possible to make the withdraw. ' +
+                    'Check that the account is valid'});
 
-            if(!account) return res.send({ message: 'It is not possible to make the withdraw. ' +
-                    'Check that the account is valid'}).status('404');
+            if (!account.active) return res.status('403').send({ message: 'It is not possible to make the deposit. ' +
+                    'Account is not active'});
 
-            if (value <= 0) return res.send({ message: 'It is not possible to make the withdraw. ' +
-                    'Invalid value'}).status('401');
+            if (value <= 0) return res.status('401').send({ message: 'It is not possible to make the withdraw. ' +
+                    'Invalid value'});
 
-            if (value > account.limitWithdrawDaily) return res.send({ message: 'It is not possible to make the withdraw. ' +
-                    'Withdrawal limit exceeded' }).status('403');
+            if (value > account.limitWithdrawDaily) return res.status('403').send(
+                { message: 'It is not possible to make the withdraw. Withdrawal limit exceeded' }
+                );
 
-            if (value > account.balance) return res.send({ message: 'It is not possible to make the withdraw. ' +
-                    'Insufficient balance' }).status('403');
+            if (value > account.balance) return res.status('403').send(
+                { message: 'It is not possible to make the withdraw. Insufficient balance' });
 
             account.balance = account.balance - parseFloat(value);
             account.limitWithdrawDaily = account.limitWithdrawDaily - parseFloat(value);
@@ -57,7 +58,7 @@ class TransactionController {
             new_transaction.amount = account.balance;
             await new_transaction.save();
 
-            return res.send({ message: 'Withdraw successful'}).status('200');
+            return res.status('200').send({ message: 'Withdraw successful'});
         } catch (e) {
             next(e)
         }

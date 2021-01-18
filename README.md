@@ -12,6 +12,10 @@
 * block account
 * bank statement
 * bank statement by period
+* execution manual prepared
+* swagger
+* Implementation of points of failure and resilience
+* design architecture drawing
 
 ### Prerequisites
 Before you begin, ensure you have met the following requirements:
@@ -40,8 +44,10 @@ $ npm start
 
 ### Swagger documentation
 
+When running the application, access the [link](http://localhost:3000/swagger)
+
 
 
 ### Entity Relationship Diagram
 
-![ERD](./resources/arquiterure.png)
+![ERD](resources/system-arquiteture/arquiterure.png)

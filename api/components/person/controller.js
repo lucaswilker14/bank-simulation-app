@@ -8,7 +8,7 @@ class PersonController {
             const { name, CPF, dateOfBirth } = req.body;
             const new_person = new personModel({ name, CPF, dateOfBirth });
             await new_person.save();
-            return res.send({ message: 'New person successfully created', person: new_person }).status('201');
+            return res.status('201').send({ message: 'New person successfully created', person: new_person });
         } catch (e) {
             next(e)
         }
