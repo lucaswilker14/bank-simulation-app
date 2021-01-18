@@ -12,6 +12,10 @@
 * block account
 * bank statement
 * bank statement by period
+* execution manual prepared
+* swagger
+* Implementation of points of failure and resilience
+* design architecture drawing
 
 ### Prerequisites
 Before you begin, ensure you have met the following requirements:
