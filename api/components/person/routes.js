@@ -7,6 +7,7 @@ const router = Router();
 const validator = createValidator({passError: true});
 const personController = new PersonController();
 
+
 router.post('/', validator.body(createPerson), personController.createPerson);
 
 module.exports = router;

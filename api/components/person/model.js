@@ -10,7 +10,8 @@ const personSchema = new Schema({
 
     CPF: {
         type: String,
-        required: [true, 'is required']
+        required: [true, 'is required'],
+        unique: true
     },
 
     dateOfBirth: {

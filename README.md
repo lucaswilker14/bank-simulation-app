@@ -48,4 +48,4 @@ $ npm start
 
 ### Entity Relationship Diagram
 
-![ERD](./resources/arquiterure.png)
+![ERD](resources/system-arquiteture/arquiterure.png)

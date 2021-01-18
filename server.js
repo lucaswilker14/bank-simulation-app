@@ -7,8 +7,9 @@ import ejs from 'ejs';
 import morgan from 'morgan';
 import cors from 'cors';
 import path from 'path'
+
 const swaggerUi = require('swagger-ui-express')
-const swaggerFile = require('./swagger_doc.json')
+import doc from './resources/swagger/swagger'
 
 
 // start application
@@ -56,6 +57,8 @@ require('../test-dev-back/api/components/transaction/model');
 //loading routes
 const routes = require('../test-dev-back/api/routes');
 app.use("/", routes)
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(doc))
+
 
 // 404 - route
 app.use((req, res, next) => {
@@ -74,7 +77,6 @@ app.use((err, req, res, next) => {
 });
 
 
-app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 // listener
 app.listen(PORT, (err) => {

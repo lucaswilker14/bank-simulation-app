@@ -74,7 +74,7 @@ class AccountController {
 
             account.active = false;
             await account.save();
-            return res.send({ messsage: 'Account block', account: account._id});
+            return res.send({ messsage: 'Account block', account: account._id}).status('201');
         } catch (e) {
             next(e)
         }
