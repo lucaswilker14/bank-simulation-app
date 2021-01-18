@@ -5,7 +5,7 @@
 
 ### Implemented features
 
-* creating account balance
+* creating account
 * deposit transaction
 * check account balance
 * withdraw transaction
@@ -13,7 +13,7 @@
 * bank statement
 * bank statement by period
 * execution manual prepared
-* swagger
+* documentation - swagger
 * Implementation of points of failure and resilience
 * design architecture drawing
 
