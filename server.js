@@ -21,7 +21,7 @@ const PORT = process.env.PORT || 3000;
 
 
 // db setup
-const db = require("../test-dev-back/api/config/database.json");
+const db = require(__dirname + "/api/config/database.json");
 const dbURI = isProd ? db.dbProd : db.dbDev;
 mongoose.connect(dbURI, {useNewUrlParser: true, useCreateIndex: true,
     useUnifiedTopology: true, useFindAndModify: false});
@@ -50,12 +50,12 @@ app.use(body_parser.urlencoded({extends: true, limit: 1.5*1024*1024}));
 
 
 //loading models
-require('../test-dev-back/api/components/account/model');
-require('../test-dev-back/api/components/person/model');
-require('../test-dev-back/api/components/transaction/model');
+require(__dirname + '/api/components/account/model')
+require(__dirname + '/api/components/person/model');
+require(__dirname + '/api/components/transaction/model');
 
 //loading routes
-const routes = require('../test-dev-back/api/routes');
+const routes = require(__dirname + '/api/routes');
 app.use("/", routes)
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(doc))
 
