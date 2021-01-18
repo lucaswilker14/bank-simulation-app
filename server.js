@@ -7,6 +7,8 @@ import ejs from 'ejs';
 import morgan from 'morgan';
 import cors from 'cors';
 import path from 'path'
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger_doc.json')
 
 
 // start application
@@ -71,6 +73,8 @@ app.use((err, req, res, next) => {
     res.status(422).json(err);
 });
 
+
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 // listener
 app.listen(PORT, (err) => {
