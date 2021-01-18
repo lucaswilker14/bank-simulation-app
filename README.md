@@ -40,7 +40,7 @@ $ npm install
 $ npm start
 ```
 
-**(Optional) There is a script (test-dev-back.json) with all the necessary routes for the execution of the requirements. Import it to the postman.**
+**(Optional) There is a script (/resources/postman/Challenge for Bank Account.postman_collection.json) with all the necessary routes for the execution of the requirements. Import it to the postman.**
 
 ### Swagger documentation
 
