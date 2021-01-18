@@ -82,10 +82,14 @@ class AccountController {
 
     async getExtract(req, res, next) {
         try {
+
             const accountId = req.params.id;
-            const trans = await transactionModel.find( { accountId: accountId })
-                .populate({path: 'accountId'});
+
+            const trans = req.query.startDate !== undefined ?
+                await AccountController.getExtractByQuery(accountId, req.query.startDate, req.query.endDate) :
+                await AccountController.getExtract(accountId);
             if (!trans) return res.send({ message: 'You have no transactions for this account!' })
+
             return res.send({transactions: AccountController.formatterExtract(trans)});
         } catch (e) {
             next(e)
@@ -98,10 +102,26 @@ class AccountController {
                 'Type Transaction: ': trans.typeTransaction,
                 'Value: ': trans.value,
                 'Account ID: ': trans.accountId._id,
-                'Date: ': trans.dateOfTransaction.toLocaleString(),
+                'Date: ': trans.dateOfTransaction.toUTCString(),
                 'Balance / Amount: ': trans.amount
             };
         });
+    };
+
+    static async getExtractByQuery(accountId, startDate, endDate) {
+        console.log('query')
+        return transactionModel.find({
+            accountId: accountId,
+            dateOfTransaction: {
+                $gte: new Date(startDate),
+                $lt: new Date(endDate)
+            }
+        }).populate({path: 'accountId'}).sort({dateOfTransaction: 'asc'});
+    };
+
+    static async getExtract(accountId) {
+        console.log('no query')
+        return transactionModel.find({ accountId: accountId }).populate({ path: 'accountId' });
     }
 
 }
