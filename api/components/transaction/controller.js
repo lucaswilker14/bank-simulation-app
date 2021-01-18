@@ -9,13 +9,13 @@ class TransactionController {
             const account = await accountModel.findOne( { _id: accountId });
 
             if (!account.active) return res.send({ message: 'It is not possible to make the deposit. ' +
-                    'Account is not active'}).status('401');
+                    'Account is not active'}).status('403');
 
             if(!account) return res.send({ message: 'It is not possible to make the deposit. ' +
                     'Check that the account is valid'}).status('404');
 
             if (value <= 0) return res.send({ message: 'It is not possible to make the deposit. ' +
-                    'Invalid value to deposit'}).status('401');
+                    'Invalid value to deposit'}).status('403');
 
             account.balance = account.balance + parseFloat(value);
             await account.save();
@@ -35,7 +35,7 @@ class TransactionController {
             const account = await accountModel.findOne( { _id: accountId });
 
             if (!account.active) return res.send({ message: 'It is not possible to make the deposit. ' +
-                    'Account is not active'}).status('401');
+                    'Account is not active'}).status('403');
 
             if(!account) return res.send({ message: 'It is not possible to make the withdraw. ' +
                     'Check that the account is valid'}).status('404');
@@ -44,10 +44,10 @@ class TransactionController {
                     'Invalid value'}).status('401');
 
             if (value > account.limitWithdrawDaily) return res.send({ message: 'It is not possible to make the withdraw. ' +
-                    'Withdrawal limit exceeded' }).status('401');
+                    'Withdrawal limit exceeded' }).status('403');
 
             if (value > account.balance) return res.send({ message: 'It is not possible to make the withdraw. ' +
-                    'Insufficient balance' }).status('401');
+                    'Insufficient balance' }).status('403');
 
             account.balance = account.balance - parseFloat(value);
             account.limitWithdrawDaily = account.limitWithdrawDaily - parseFloat(value);

@@ -6,7 +6,8 @@ const accountSchema = new Schema({
     personId: {
         type: Schema.Types.ObjectId,
         ref: 'Person',
-        required: [true, 'is required']
+        required: [true, 'is required'],
+        unique: true
     },
 
     balance: {

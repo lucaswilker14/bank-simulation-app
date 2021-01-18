@@ -1,0 +1,297 @@
+{
+	"info": {
+		"_postman_id": "e09dc9df-683c-46fb-8485-ab02bc52a968",
+		"name": "Challenge for Bank Account",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "account",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/account",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "personId",
+									"value": "600503ca2082312c3fb573b1",
+									"type": "text"
+								},
+								{
+									"key": "balance",
+									"value": "3500",
+									"type": "text"
+								},
+								{
+									"key": "limitWithdrawDaily",
+									"value": "1000",
+									"type": "text"
+								},
+								{
+									"key": "accountType",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/account/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get balance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/account/balance/600504dff0e00e2c5bb552ca",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								"balance",
+								"600504dff0e00e2c5bb552ca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "block account",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/account/block/6004bb5c03482918f09f77d0",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								"block",
+								"6004bb5c03482918f09f77d0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get extract",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/account/extract/6004bb5c03482918f09f77d0",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								"extract",
+								"6004bb5c03482918f09f77d0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "extract by period",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/account/extract/6004bb5c03482918f09f77d0?startDate=2021-01-17&endDate=2021-01-20",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								"extract",
+								"6004bb5c03482918f09f77d0"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2021-01-17"
+								},
+								{
+									"key": "endDate",
+									"value": "2021-01-20"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "person",
+			"item": [
+				{
+					"name": "new person",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Lucas Wilker",
+									"type": "text"
+								},
+								{
+									"key": "CPF",
+									"value": "111.000.111-00",
+									"type": "text"
+								},
+								{
+									"key": "dateOfBirth",
+									"value": "1994-10-24",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/person",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"person"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "transaction",
+			"item": [
+				{
+					"name": "deposit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "accountId",
+									"value": "60043548a556440085395043",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "value",
+									"value": "200",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/account/deposit/6004bb5c03482918f09f77d0",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								"deposit",
+								"6004bb5c03482918f09f77d0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "make withdraw",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "value",
+									"value": "500",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/account/withdraw/6004bb5c03482918f09f77d0",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								"withdraw",
+								"6004bb5c03482918f09f77d0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

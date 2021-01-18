@@ -46,7 +46,7 @@ class AccountController {
             if (!account) return res.send({ message: 'It is not possible to make the deposit. ' +
                     'Check that the account is valid'}).status('404');
 
-            return res.send({ Balance: 'US$ ' + account.balance.toFixed(2) });
+            return res.send({ Balance: 'US$ ' + account.balance.toFixed(2) }).status('200');
         } catch (e) {
             next(e)
         }
@@ -70,7 +70,7 @@ class AccountController {
             if (!account) return res.send({ message: 'It is not possible to make the deposit. ' +
                     'Check that the account is valid'}).status('404');
 
-            if (account.active === false) return res.send({ message: 'Account already block'}).status('401');
+            if (account.active === false) return res.send({ message: 'Account already block'}).status('403');
 
             account.active = false;
             await account.save();
@@ -88,9 +88,9 @@ class AccountController {
             const trans = req.query.startDate !== undefined ?
                 await AccountController.getExtractByQuery(accountId, req.query.startDate, req.query.endDate) :
                 await AccountController.getExtract(accountId);
-            if (!trans) return res.send({ message: 'You have no transactions for this account!' })
+            if (!trans) return res.send({ message: 'You have no transactions for this account!' }).status('404')
 
-            return res.send({transactions: AccountController.formatterExtract(trans)});
+            return res.send({transactions: AccountController.formatterExtract(trans)}).status('200');
         } catch (e) {
             next(e)
         }

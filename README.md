@@ -33,7 +33,7 @@ $ npm install
 **After installing the dependencies, start the server:**
 
 ```sh
-$ npm run
+$ npm start
 ```
 
 **(Optional) There is a script (test-dev-back.json) with all the necessary routes for the execution of the requirements. Import it to the postman.**
