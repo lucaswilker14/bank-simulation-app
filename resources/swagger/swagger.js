@@ -1,9 +1,8 @@
 const doc = {
     "swagger": "2.0",
     "info": {
-        "description": "Challenge Dock Bank",
         "version": "1.0.0",
-        "title": "API",
+        "title": "Challenge Dock Bank - API",
         "license": {
             "name": "MIT",
             "url": "https://opensource.org/licenses/MIT"
@@ -54,7 +53,7 @@ const doc = {
                         "description": "New person successfully created!"
                     },
                     "422": {
-                        "description": "Person validation failed: CPF: is already being used"
+                        "description": "Person validation failed: 'entity': is already being used or is required"
                     }
                 }
             }
@@ -119,14 +118,10 @@ const doc = {
                         "description": "Deposit successful"
                     },
                     "403": {
-                        "description": "It is not possible to make the deposit. Account is not active",
-                        "description 2": 'It is not possible to make the deposit. Invalid value to deposit'
+                        "description": "It is not possible to make the deposit. Account is not active"
                     },
                     "404": {
                         "description": "It is not possible to make the deposit. Check that the account is valid"
-                    },
-                    "422": {
-                        "description": "Account validation failed: 'entity': is already being used"
                     }
                 }
             }
@@ -150,7 +145,7 @@ const doc = {
                         "description": "Balance US$: xx,xx"
                     },
                     "404": {
-                        "description": "It is not possible to make the deposit. Check that the account is valid"
+                        "description": "It is not possible to make get balance.. Check that the account is valid"
                     }
                 }
             }
@@ -185,9 +180,9 @@ const doc = {
                         "description": "It is not possible to make the deposit. Invalid value"
                     },
                     "403": {
-                        "description": ["It is not possible to make the deposit. Account is not active",
-                            "It is not possible to make the deposit. Withdrawal limit exceeded",
-                            "It is not possible to make the deposit. Insufficient balance"]
+                        "description": "It is not possible to make the deposit. Account is not active / " +
+                        "It is not possible to make the deposit. Withdrawal limit exceeded / " +
+                        "It is not possible to make the deposit. Insufficient balance"
                     },
                     "404": {
                         "description": "It is not possible to make the deposit. Check that the account is valid"

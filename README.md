@@ -44,6 +44,8 @@ $ npm start
 
 ### Swagger documentation
 
+When running the application, access the [link](http://localhost:3000/swagger)
+
 
 
 ### Entity Relationship Diagram
