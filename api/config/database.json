@@ -1,4 +1,4 @@
 {
-  "dbDev": "mongodb://localhost:27017/test-dev-back",
-  "dbProd": "mongodb://localhost:27017/test-dev-back"
+  "dbDev": "mongodb://db:27017/test-dev-back",
+  "dbProd": "mongodb://db:27017/test-dev-back"
 }

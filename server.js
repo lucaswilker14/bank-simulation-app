@@ -15,6 +15,7 @@ import doc from './resources/swagger/swagger'
 // start application
 const app = express();
 
+
 // environment
 const isProd = process.env.NODE_ENV === "production";
 const PORT = process.env.PORT || 3000;
@@ -24,7 +25,9 @@ const PORT = process.env.PORT || 3000;
 const db = require(__dirname + "/api/config/database.json");
 const dbURI = isProd ? db.dbProd : db.dbDev;
 mongoose.connect(dbURI, {useNewUrlParser: true, useCreateIndex: true,
-    useUnifiedTopology: true, useFindAndModify: false});
+    useUnifiedTopology: true, useFindAndModify: false})
+    .then(result => {console.log('MongoDB connect!')})
+    .catch(result => {console.log(result)} );
 
 
 // Set 'views' directory for any views
