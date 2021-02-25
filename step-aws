@@ -1,0 +1,21 @@
+# step-by-step aws ec2 sem precisar de ssh
+
+# 1 - criar um Dockerfile
+
+# 2 - criar um docker-compose e orquestrar os serviços
+
+# 3 - subir o container docker: $ docker-compose up -d
+
+# 4 - download aws cli -> não precisa ir no site da aws para criar instancias
+
+# 5 - $ aws configure -> visitar o site e pegar: chaveID, senhaID, local_onde_ta_rodando, json
+
+# 6 - instalar docker-machine
+
+# 7 - $ docker-machine create --driver amazonec2 --amazonec2-instance-type "t2.micro" --amazon-region "nome da regiao" <nome_da_instacia_que_tu_quiser>
+
+# 8 - definindo variaveis de ambiente para o docker-machine acessar o servidor aws: $ docker-machine env <nome_da_instancia_criada>
+
+# 9 - $ eval $(docker-machine env <nome_da_instancia_criada>)
+
+# 10 - No site da amazon, "Security Groups" > "docker-machine" > adicionar portas: "TCP Personalizado; porta 3000; qualquer pessoa;"
