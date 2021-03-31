@@ -1,4 +1,4 @@
-# Dock Bank Code Challenge for Bank Account
+# Bank Code Challenge for Bank Account
 
 
 **Objective**: Challenge proposed for competence of vacancy application
